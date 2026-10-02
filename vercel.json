@@ -5,7 +5,8 @@
   "buildCommand": "npm install && npm run build",
   "functions": {
     "api/index.php": {
-      "runtime": "vercel-php@0.9.0"
+      "runtime": "vercel-php@0.9.0",
+      "includeFiles": "database/**"
     }
   },
   "routes": [
@@ -23,7 +24,6 @@
     "APP_DEBUG": "true",
     "APP_KEY": "base64:Qagnn4syn7QSEbyFBQW9wk8N2EDWsMGLF+UiptA3Djg=",
     "DB_CONNECTION": "sqlite",
-    "DB_DATABASE": "/var/task/user/database/database.sqlite",
     "APP_CONFIG_CACHE": "/tmp/storage/framework/cache/config.php",
     "APP_EVENTS_CACHE": "/tmp/storage/framework/cache/events.php",
     "APP_PACKAGES_CACHE": "/tmp/storage/framework/cache/packages.php",
