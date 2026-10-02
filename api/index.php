@@ -14,12 +14,20 @@ foreach ($storageDirs as $dir) {
     }
 }
 
-// Arahkan cache Laravel ke folder sementara /tmp Vercel
+// Salin database ke /tmp agar bisa diakses jika di Vercel path aslinya bermasalah
+$dbPath = __DIR__ . '/../database/database.sqlite';
+$tmpDbPath = '/tmp/database.sqlite';
+if (file_exists($dbPath) && !file_exists($tmpDbPath)) {
+    copy($dbPath, $tmpDbPath);
+}
+
+// Arahkan konfigurasi ke folder /tmp
 putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
 putenv('APP_SERVICES_CACHE=/tmp/storage/framework/cache/services.php');
 putenv('APP_PACKAGES_CACHE=/tmp/storage/framework/cache/packages.php');
 putenv('APP_CONFIG_CACHE=/tmp/storage/framework/cache/config.php');
 putenv('APP_ROUTES_CACHE=/tmp/storage/framework/cache/routes.php');
+putenv('DB_DATABASE=' . $tmpDbPath);
 
 // Jalankan Laravel dari public/index.php
 require __DIR__ . '/../public/index.php';
